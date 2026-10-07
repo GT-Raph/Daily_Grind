@@ -1,0 +1,8 @@
+{% extends 'website/order_base.html' %}
+{% block title %}{{ order.reference }} · The Daily Grind{% endblock %}
+{% block content %}
+<section class="order-page" id="order-content">
+  <header class="order-heading"><h1>Thanks, {{ order.customer_name }}.</h1><p>Your order reference: <strong>{{ order.reference }}</strong></p><p class="field-help" data-poll-status>Keep this page open for updates, or refresh to check.</p></header>
+  <div data-receipt-status aria-live="polite" data-poll-url="{% url 'website:receipt' order.id %}?partial=1">{% include 'website/includes/receipt_details.html' %}</div>
+</section>
+{% endblock %}

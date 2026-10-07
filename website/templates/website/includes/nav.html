@@ -1,0 +1,11 @@
+<header class="nav">
+  <nav class="nav__group nav__group--left" aria-label="Main"><a href="#top">Home</a><a href="#menu">Menu</a></nav>
+  <a href="#top" class="nav__logo" aria-label="{{ shop.name }}, back to top">{% include 'website/includes/badge.html' %}</a>
+  <nav class="nav__group nav__group--right" aria-label="More"><a href="#visit">Visit</a><a href="{% url 'website:basket' %}">Your order (<span data-basket-count>{{ basket_count }}</span>)</a></nav>
+  <button type="button" class="nav__toggle" aria-expanded="false" aria-controls="mobile-menu" hidden>
+    <span class="sr-only">Open menu</span><span class="nav__bar"></span><span class="nav__bar"></span>
+  </button>
+  <nav id="mobile-menu" class="nav__mobile" aria-label="Mobile navigation" hidden>
+    <a href="#top">Home</a><a href="#menu">Menu</a><a href="#reviews">Reviews</a><a href="#visit">Visit</a><a href="{% url 'website:basket' %}">Your order (<span data-basket-count>{{ basket_count }}</span>)</a>
+  </nav>
+</header>

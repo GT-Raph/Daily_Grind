@@ -1,0 +1,39 @@
+{% extends 'website/order_base.html' %}
+{% load static %}
+{% block title %}Your order · The Daily Grind{% endblock %}
+{% block content %}
+<section class="order-page" id="order-content">
+  <header class="order-heading"><h1>Your order</h1><p>A little pick-me-up, ready to collect from Spintex Road.</p></header>
+  {% for message in messages %}<p class="order-notice" role="alert">{{ message }}</p>{% endfor %}
+  {% if not ordering_enabled %}<div class="order-empty"><h2>Online ordering is taking a break.</h2><p>Call the shop to place your order.</p><a href="tel:{{ shop.phoneLink }}" class="btn btn--maroon">Call {{ shop.phone }}</a></div>
+  {% elif basket.lines %}
+  <div class="order-layout">
+    <div>
+      <ul class="basket-lines">
+        {% for item in basket.lines %}
+        <li class="basket-line">
+          <img src="{{ item.basket_image }}" alt="" width="96" height="96">
+          <div class="basket-line__details"><h2>{{ item.name }}</h2><p>GH₵{{ item.price|floatformat:2 }} each</p>
+            <form method="post" action="{% url 'website:change_cart' %}" class="quantity-form">
+              {% csrf_token %}<input type="hidden" name="product_id" value="{{ item.id }}">
+              <label for="quantity-{{ item.id }}">Qty</label><input id="quantity-{{ item.id }}" name="quantity" type="number" min="1" max="20" value="{{ item.quantity }}" inputmode="numeric" required aria-label="Quantity of {{ item.name }}">
+              <button name="action" value="update" class="text-button">Update</button><button name="action" value="remove" class="text-button" formnovalidate>Remove<span class="sr-only"> {{ item.name }}</span></button>
+            </form>
+          </div><strong class="basket-line__total">GH₵{{ item.subtotal|floatformat:2 }}</strong>
+        </li>
+        {% endfor %}
+      </ul>
+      <a href="{% url 'website:home' %}#menu" class="order-back">Add something else</a>
+    </div>
+    <aside class="order-summary" aria-label="Order total">
+      <h2>Pickup at the shop</h2><p>{{ shop.street }}, {{ shop.city }}</p>
+      <div class="order-total"><span>Total</span><strong>GH₵{{ basket.total|floatformat:2 }}</strong></div>
+      <p>Pay when you collect. No online payment required.</p>
+      <a href="{% url 'website:checkout' %}" class="btn btn--maroon">Continue to your details</a>
+    </aside>
+  </div>
+  {% else %}
+  <div class="order-empty"><h2>What are you craving?</h2><p>Your order is empty. Start with a coffee, then find something to go with it.</p><a href="{% url 'website:home' %}#menu" class="btn btn--maroon">Explore the menu</a></div>
+  {% endif %}
+</section>
+{% endblock %}

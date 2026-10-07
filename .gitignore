@@ -1,0 +1,14 @@
+node_modules
+dist
+.venv/
+__pycache__/
+*.py[cod]
+db.sqlite3
+db.sqlite3-*
+staticfiles/
+.env
+.migration-backups/
+.verification/
+.claude/
+.qodo/
+tmp/

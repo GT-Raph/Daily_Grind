@@ -1,0 +1,9 @@
+Use case: product-mockup
+Asset type: illustrative menu product image for The Daily Grind; AI-generated illustration, not an actual shop photograph.
+Menu item: Morning Ritual. Description: Choice of eggs + Coffee. Representative choices shown.
+Subject: A representative eggs and coffee breakfast combo: two appetizing sunny-side-up plain eggs on a discreet round white plate at the front left, and one white ceramic cup and matching saucer of black coffee at the back right. Only these menu products, no bread, meat, salad, garnishes or sides.
+Style: photorealistic appetizing catalog product photography with realistic detailed textures, matching isolated menu cutouts.
+Composition: square canvas, centered entire product visible at a slightly elevated three-quarter angle, approximately 8 percent empty margin on all sides, balanced compact scale.
+Lighting: soft diffused studio light and natural highlights.
+Background: genuinely transparent native alpha, including gaps through handles; preserve opaque white ceramic and natural translucent glass.
+Constraints: no text, no logos, no labels, no watermark, no people, no hands, no table, no scenery, no background color, no decorative props, no unrelated food. No cropped edges.

@@ -1,0 +1,208 @@
+{
+  "shop": {
+    "name": "The Daily Grind",
+    "street": "Spintex Road",
+    "city": "Accra",
+    "plusCode": "JVH3+X7 Accra",
+    "phone": "020 622 9966",
+    "phoneLink": "+233206229966",
+    "mapsQuery": "The Daily Grind, Spintex Rd, Accra",
+    "rating": 4.9,
+    "reviewCount": 42
+  },
+  "reviews": [
+    {
+      "quote": "They take the art of coffee very seriously.",
+      "author": "Stephen M."
+    },
+    {
+      "quote": "The first shop in Accra to be specialized in Coffee in a professional manner.",
+      "author": "Feras B."
+    },
+    {
+      "quote": "From the moment you walk in, the smell of freshly brewed coffee instantly sets the mood.",
+      "author": "Nahla M."
+    },
+    {
+      "quote": "Great authentic coffee. Not the usual coffee you find in Ghana.",
+      "author": "Hassan B."
+    },
+    {
+      "quote": "Arguably has the best coffee in town.",
+      "author": "Rhody A."
+    },
+    {
+      "quote": "Try their Spanish latte and thank me later.",
+      "author": "Najilahu"
+    },
+    {
+      "quote": "Best coffee in town! Lovely place, excellent service, cozy atmosphere.",
+      "author": "Sabina V."
+    },
+    {
+      "quote": "Super cute place with the best turkey and cheese sandwiches! The crunch was so good!!",
+      "author": "The guide"
+    },
+    {
+      "quote": "An instant feeling of community and comfort.",
+      "author": "Isabella S."
+    },
+    {
+      "quote": "Drinks are always on point, the service is great and the owner's passionate about everything they produce.",
+      "author": "Tamaan W."
+    },
+    {
+      "quote": "Their wifi is the most reliable and great for meetings.",
+      "author": "Sade A."
+    },
+    {
+      "quote": "One of the best places to enjoy a good cup of coffee, work, and chat",
+      "author": "Ibrahim A."
+    },
+    {
+      "quote": "Great gem of Accra!",
+      "author": "Bronwenn O."
+    },
+    {
+      "quote": "My favorite coffee shop in Accra!",
+      "author": "Celeste R."
+    }
+  ],
+  "menu": [
+    {
+      "id": "coffee",
+      "label": "Coffee",
+      "items": [
+        {
+          "name": "Espresso",
+          "note": "Our own house blend, pulled short",
+          "price": "35"
+        },
+        {
+          "name": "Spanish latte",
+          "note": "Espresso and milk, sweetened with condensed milk",
+          "price": "60"
+        },
+        {
+          "name": "Flat white",
+          "note": "Double ristretto, silky milk",
+          "price": "55"
+        },
+        {
+          "name": "Cappuccino",
+          "note": "Dusted with cocoa if you like",
+          "price": "55"
+        },
+        {
+          "name": "Batch brew",
+          "note": "Filter coffee, ready to pour",
+          "price": "45"
+        },
+        {
+          "name": "Pour-over",
+          "note": "Made to order, about four minutes",
+          "price": "70"
+        },
+        {
+          "name": "Iced oat latte",
+          "note": "Oat milk over ice, lightly sweet",
+          "price": "65"
+        }
+      ]
+    },
+    {
+      "id": "other",
+      "label": "Tea & other",
+      "items": [
+        {
+          "name": "Chai latte",
+          "note": "Spiced in-house, steamed with milk",
+          "price": "50"
+        },
+        {
+          "name": "Loose-leaf tea",
+          "note": "Breakfast, earl grey, green or mint",
+          "price": "35"
+        },
+        {
+          "name": "Hot chocolate",
+          "note": "Dark chocolate melted, not powder",
+          "price": "55"
+        },
+        {
+          "name": "Fresh lemonade",
+          "note": "Squeezed every morning",
+          "price": "40"
+        }
+      ]
+    },
+    {
+      "id": "food",
+      "label": "Food",
+      "items": [
+        {
+          "name": "Awarma labneh saj",
+          "note": "Thin saj bread, labneh and awarma",
+          "price": "95"
+        },
+        {
+          "name": "Turkey and cheese sandwich",
+          "note": "Toasted until it crunches",
+          "price": "90"
+        },
+        {
+          "name": "Butter croissant",
+          "note": "Baked fresh each morning",
+          "price": "45"
+        },
+        {
+          "name": "Banana bread",
+          "note": "Toasted with salted butter",
+          "price": "45"
+        },
+        {
+          "name": "Granola pot",
+          "note": "Yoghurt, honey and fresh fruit",
+          "price": "75"
+        }
+      ]
+    }
+  ],
+  "hours": [
+    {
+      "day": "Sunday",
+      "open": 7,
+      "close": 22
+    },
+    {
+      "day": "Monday",
+      "open": 7,
+      "close": 22
+    },
+    {
+      "day": "Tuesday",
+      "open": 7,
+      "close": 22
+    },
+    {
+      "day": "Wednesday",
+      "open": 7,
+      "close": 22
+    },
+    {
+      "day": "Thursday",
+      "open": 7,
+      "close": 22
+    },
+    {
+      "day": "Friday",
+      "open": 7,
+      "close": 22
+    },
+    {
+      "day": "Saturday",
+      "open": 7,
+      "close": 22
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{% extends 'website/order_base.html' %}
+{% block title %}Checkout · The Daily Grind{% endblock %}
+{% block content %}
+<section class="order-page" id="order-content">
+  <a href="{% url 'website:basket' %}" class="order-back">Back to your order</a>
+  <header class="order-heading"><h1>Make it yours.</h1><p>Leave your details. Pay at the shop when you collect.</p></header>
+  <div class="order-layout">
+    <form method="post" action="{% url 'website:checkout' %}" class="checkout-form" data-checkout-form>
+      {% csrf_token %}{{ checkout_form.checkout_token }}
+      {% if checkout_form.errors %}<div class="order-notice" role="alert" tabindex="-1" data-form-errors><strong>Please check your details.</strong>{{ checkout_form.non_field_errors }}{{ checkout_form.checkout_token.errors }}</div>{% endif %}
+      {% for field in checkout_form.visible_fields %}
+      <div class="order-field"><label for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}{% if field.help_text %}<p id="{{ field.auto_id }}_helptext" class="field-help">{{ field.help_text }}</p>{% endif %}{{ field.errors }}</div>
+      {% endfor %}
+      <div class="checkout-submit"><p>Pickup only, from {{ shop.street }}. The shop will confirm your order before preparing it. Keep the confirmation page open for updates.</p><button class="btn btn--maroon" type="submit">Place pickup order · GH₵{{ basket.total|floatformat:2 }}</button><p class="field-help">Your name and number are shared with the shop to fulfil this order.</p></div>
+    </form>
+    <aside class="order-summary" aria-label="Order summary"><h2>The good stuff</h2>
+      <ul class="summary-lines">{% for item in basket.lines %}<li><span>{{ item.quantity }} × {{ item.name }}</span><span>GH₵{{ item.subtotal|floatformat:2 }}</span></li>{% endfor %}</ul>
+      <div class="order-total"><span>Due at pickup</span><strong>GH₵{{ basket.total|floatformat:2 }}</strong></div>
+      <p>No payment is taken online.</p><a href="{% url 'website:basket' %}">Edit your order</a>
+    </aside>
+  </div>
+</section>
+{% endblock %}

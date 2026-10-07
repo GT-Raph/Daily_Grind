@@ -1,0 +1,8 @@
+<div data-receipt-state="{{ order.status }}" class="receipt-status">
+  <p class="order-state">{{ order.get_status_display }}</p>
+  {% if order.status == 'new' %}<p>Your order is saved and awaiting the shop’s confirmation. Please wait for an update before coming to collect.</p>
+  {% elif order.status == 'accepted' %}<p>The shop has accepted your order and is getting it ready.</p>
+  {% elif order.status == 'ready' %}<p>Your order is ready. Head to {{ shop.street }} and show your order reference.</p>
+  {% elif order.status == 'completed' %}<p>Thanks for stopping by. Enjoy your order!</p>
+  {% else %}<p>The shop has cancelled this order. Please call if you need more information. No payment was taken online.</p>{% endif %}
+</div>

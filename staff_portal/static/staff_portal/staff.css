@@ -1,0 +1,52 @@
+/* Staff use the shop's type and palette in a dedicated, compact workspace. */
+.staff-site { background: var(--peach-light); min-height: 100svh; display: flex; flex-direction: column; }
+.staff-header { background: var(--brown); color: var(--peach-light); padding: 18px var(--gutter); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px 32px; }
+.staff-brand { display: flex; align-items: center; flex-wrap: wrap; gap: 16px; text-decoration: none; }
+.staff-brand span:first-child { font: 800 1.75rem/1.1 var(--display); }
+.staff-brand span:last-child { border-left: 1px solid currentColor; padding-left: 16px; font-size: .875rem; }
+.staff-account { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 24px; font-size: .875rem; min-width: 0; }
+.staff-account > span { overflow-wrap: anywhere; }
+.staff-signout { border: 1px solid currentColor; border-radius: 6px; color: inherit; background: transparent; font: 600 .875rem var(--body); padding: 10px 16px; min-height: 44px; cursor: pointer; }
+.staff-header :focus-visible { outline-color: var(--peach-light); }
+.staff-main { width: 100%; max-width: 1360px; margin: 0 auto; padding: 44px var(--gutter) 64px; flex: 1; }
+.staff-footer { padding: 20px var(--gutter); border-top: 1px solid var(--line); color: var(--text); font-size: .8rem; }
+.staff-main h1 { font: 800 clamp(2.5rem, 4vw, 3.5rem)/1.05 var(--display); overflow-wrap: anywhere; }
+.staff-login { max-width: 420px; margin: clamp(12px, 5vh, 56px) auto 32px; }
+.staff-login > p { margin-top: 16px; color: var(--text); }
+.staff-login form { margin-top: 32px; }
+.staff-login .order-field input { background: var(--peach); }
+.staff-login .btn { width: 100%; }
+.staff-login > .btn { margin-top: 28px; }
+.staff-login .staff-login__help { margin-top: 28px; font-size: .875rem; }
+.staff-login .errorlist { margin: 0; }
+.staff-heading { display: flex; align-items: start; justify-content: space-between; gap: 16px 28px; flex-wrap: wrap; margin-bottom: 32px; }
+.staff-heading p { margin-top: 12px; color: var(--text); max-width: 62ch; }
+.staff-admin { font-size: .875rem; padding: 10px 0; min-height: 44px; }
+.staff-site a { text-underline-offset: 5px; }
+.staff-site .queue-toolbar { gap: 12px 24px; margin-bottom: 0; }
+.staff-site .queue-toolbar nav { gap: 24px; }
+.staff-site .queue-toolbar nav a { min-height: 48px; text-decoration: none; border-bottom: 2px solid transparent; }
+.staff-site .queue-toolbar nav [aria-current] { border-bottom-color: var(--maroon); }
+.staff-updates { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 16px; font-size: .875rem; }
+.staff-updates .field-help { margin: 0; }
+.staff-updates a { padding: 10px 0; min-height: 44px; }
+.staff-readonly { margin: 20px 0; font-size: .875rem; }
+.staff-site .queue-order__head h2 { font: 800 1.7rem/1.2 var(--display); }
+.staff-site .queue-order__head a { display: inline-block; padding-top: 6px; }
+.staff-site .order-empty { max-width: none; padding-block: 48px 80px; }
+.staff-site .order-empty h2 { font: 800 2rem/1.2 var(--display); }
+.staff-site .queue-controls .btn { padding: 14px 18px; line-height: 1.4; min-height: 48px; }
+.staff-site .queue-checked { max-width: 75ch; }
+.staff-site .btn:disabled { opacity: .65; cursor: wait; }
+.staff-site .summary-lines li span:first-child { overflow-wrap: anywhere; min-width: 0; }
+@media (hover: hover) and (pointer: fine) {
+  .staff-signout:hover { background: var(--peach-light); color: var(--brown); }
+  .staff-site .queue-toolbar nav a:hover { border-bottom-color: var(--maroon); }
+}
+@media (max-width: 760px) {
+  .staff-main { padding-top: 28px; padding-bottom: 40px; }
+  .staff-header { padding-block: 14px; }
+  .staff-heading { margin-bottom: 20px; }
+  .staff-login { margin-top: 20px; }
+  .staff-updates { width: 100%; margin-bottom: 12px; }
+}

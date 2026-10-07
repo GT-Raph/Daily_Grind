@@ -1,0 +1,8 @@
+Use case: product-mockup
+Asset type: illustrative photoreal cafe menu product cutout.
+Scene/backdrop: genuinely transparent background with native alpha; no surface or scenery.
+Style/medium: appetizing photorealistic food illustration, detailed natural texture, restrained studio food photography style.
+Composition/framing: one square image, complete serving centered at an elevated three-quarter angle, at least 8 percent clear margin on every edge. Entire food and any plate fully in frame, no cropping.
+Lighting/mood: soft studio light, realistic highlights and appetizing warm tones.
+Subject: Tuna Pop: one simple toasted rectangular tuna sandwich cut diagonally into two halves, displaying a generous filling of flaky tuna. Crisp golden bread. Keep the filling simple, with tuna only visible. No invented vegetables, cheese, olives, egg, garnish or side orders.
+Constraints: only the specified food components; no invented toppings, garnish, side orders, drinks, utensils, napkins, text, labels, logos, watermark, hands, people, table, background or scenery. Transparent background, not a checkerboard image. This is an illustrative menu asset, not a claim to document an actual serving.

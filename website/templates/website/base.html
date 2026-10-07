@@ -1,0 +1,27 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="The Daily Grind is a specialty coffee shop on Spintex Road, Accra, with its own house blend. Dine in, take away or delivery.">
+    <link rel="icon" href="{% static 'favicon.svg' %}" type="image/svg+xml">
+    <link rel="preload" href="{% static 'website/fonts/big-shoulders-normal.woff2' %}" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="{% static 'website/fonts/fonts.css' %}">
+    <link rel="stylesheet" href="{% static 'website/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'website/orders.css' %}">
+    <title>{% block title %}The Daily Grind, Accra{% endblock %}</title>
+    {% block scripts %}
+    <script defer src="{% static 'website/vendor/lenis.min.js' %}"></script>
+    <script defer src="{% static 'website/site.js' %}"></script>
+    {% endblock %}
+    <script defer src="{% static 'website/orders.js' %}"></script>
+  </head>
+  <body>
+    {% block navigation %}<a href="#menu" class="skip">Skip to the menu</a>
+    {% include 'website/includes/nav.html' %}
+    {% endblock %}
+    <main>{% block content %}{% endblock %}</main>
+    {% block footer %}{% include 'website/includes/footer.html' %}{% endblock %}
+  </body>
+</html>

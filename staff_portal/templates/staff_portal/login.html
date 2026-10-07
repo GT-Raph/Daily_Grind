@@ -1,0 +1,17 @@
+{% extends 'staff_portal/base.html' %}
+{% block title %}Staff sign in · The Daily Grind{% endblock %}
+{% block content %}
+<section class="staff-login">
+  <h1>Staff sign in</h1>
+  <p>Manage pickup orders, from the first cup to collection.</p>
+  <form method="post" action="{% url 'staff:login' %}" data-staff-login>
+    {% csrf_token %}
+    {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
+    {% if form.non_field_errors %}<div class="order-notice" role="alert" tabindex="-1" data-form-errors>{{ form.non_field_errors }}</div>{% endif %}
+    <div class="order-field"><label for="{{ form.username.id_for_label }}">Username</label>{{ form.username }}{{ form.username.errors }}</div>
+    <div class="order-field"><label for="{{ form.password.id_for_label }}">Password</label>{{ form.password }}{{ form.password.errors }}</div>
+    <button type="submit" class="btn btn--maroon">Sign in</button>
+  </form>
+  <p class="staff-login__help">Use your staff account. Need access or a password reset? Ask your shop manager.</p>
+</section>
+{% endblock %}

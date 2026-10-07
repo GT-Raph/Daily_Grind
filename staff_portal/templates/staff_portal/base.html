@@ -1,0 +1,28 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>{% block title %}Staff · The Daily Grind{% endblock %}</title>
+  <link rel="icon" href="{% static 'favicon.svg' %}" type="image/svg+xml">
+  <link rel="preload" href="{% static 'website/fonts/big-shoulders-normal.woff2' %}" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="{% static 'website/fonts/fonts.css' %}">
+  <link rel="stylesheet" href="{% static 'website/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'website/orders.css' %}">
+  <link rel="stylesheet" href="{% static 'staff_portal/staff.css' %}">
+  <script defer src="{% static 'staff_portal/staff.js' %}"></script>
+</head>
+<body class="staff-site">
+  <a href="#staff-content" class="skip">Skip to content</a>
+  <header class="staff-header">
+    <a href="{% url 'staff:orders' %}" class="staff-brand"><span>The Daily Grind</span><span>Staff</span></a>
+    {% if user.is_authenticated %}
+    <div class="staff-account"><span>{{ user.get_username }}</span><form method="post" action="{% url 'staff:logout' %}">{% csrf_token %}<button class="staff-signout">Sign out</button></form></div>
+    {% endif %}
+  </header>
+  <main id="staff-content" class="staff-main" tabindex="-1">{% block content %}{% endblock %}</main>
+  <footer class="staff-footer">The Daily Grind · Staff workspace</footer>
+</body>
+</html>

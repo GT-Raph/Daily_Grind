@@ -1,0 +1,17 @@
+<div class="order-layout">
+  <div>
+    {% include 'website/includes/receipt_status.html' %}
+    <div class="pickup-details">
+      {% if order.status == 'completed' %}
+      <h2>See you next time.</h2><p>Your order has been collected and paid for at the shop.</p><p>Questions about this order? Call with your reference.</p><div class="order-actions"><a href="tel:{{ shop.phoneLink }}">Call {{ shop.phone }}</a></div>
+      {% elif order.status == 'cancelled' %}
+      <h2>Need a hand?</h2><p>There is nothing to collect for this order. Call the shop with your reference if you need more information.</p><div class="order-actions"><a href="tel:{{ shop.phoneLink }}">Call {{ shop.phone }}</a></div>
+      {% else %}
+      <h2>Find us on Spintex Road</h2><p>{{ shop.street }}, {{ shop.city }}<br>Bring your order reference and pay at collection.</p><div class="order-actions"><a href="{{ maps_url }}" class="btn btn--maroon" target="_blank" rel="noreferrer">Get directions</a><a href="tel:{{ shop.phoneLink }}">Call {{ shop.phone }}</a></div><p class="field-help">Need to change or cancel? Call the shop with your order reference.</p>
+      {% endif %}
+    </div>
+    {% if order.notes %}<div class="pickup-details"><h2>Your note</h2><p>{{ order.notes }}</p></div>{% endif %}
+    <a href="{% url 'website:home' %}#menu" class="order-back">Back to the menu</a>
+  </div>
+  <aside class="order-summary"><h2>Your pickup order</h2><ul class="summary-lines">{% for item in order.items.all %}<li><span>{{ item.quantity }} × {{ item.name }}</span><span>GH₵{{ item.subtotal|floatformat:2 }}</span></li>{% endfor %}</ul><div class="order-total"><span>{% if order.status == 'completed' %}Paid at pickup{% elif order.status == 'cancelled' %}Order total{% else %}Pay at pickup{% endif %}</span><strong>GH₵{{ order.total|floatformat:2 }}</strong></div><p>No payment taken online.</p></aside>
+</div>

@@ -1,0 +1,8 @@
+Use case: product-mockup
+Asset type: illustrative menu product cutout for The Daily Grind website; generated illustration, not an actual shop photograph.
+Menu item: Passion fruit. Exact menu description: Fresh-pressed passion fruit juice.
+Subject: One clear short cylindrical drinking glass filled with fresh passion fruit juice, natural yellow-gold color with a few tiny dark passion-fruit seeds suspended in the juice. No garnish or loose food.
+Style/medium: appetizing photorealistic studio product illustration, natural material texture and soft studio light, matching polished isolated cafe menu cutouts.
+Composition/framing: square canvas, entire subject centered, three-quarter view slightly from above, approximately 8 percent clear margin on every side, nothing cropped.
+Scene/backdrop: genuinely transparent background with native alpha; preserve natural object edge details and clear glass gaps.
+Constraints: one product illustration only. No text, logos, labels, watermark, collage, contact sheet, hands, people, tabletop, scenery or background. No invented side dishes. Minimal soft contact shadow only, no opaque ground plane.

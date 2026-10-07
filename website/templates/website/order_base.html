@@ -1,0 +1,12 @@
+{% extends 'website/base.html' %}
+{% block scripts %}{% endblock %}
+{% block navigation %}
+<a href="#order-content" class="skip">Skip to content</a>
+<header class="order-nav">
+  <a href="{% url 'website:home' %}" class="order-nav__brand" aria-label="The Daily Grind, home">{% include 'website/includes/badge.html' %}</a>
+  <nav aria-label="Order navigation"><a href="{% url 'website:home' %}#menu">Menu</a><a href="{% url 'website:basket' %}">Your order (<span data-basket-count>{{ basket_count }}</span>)</a></nav>
+</header>
+{% endblock %}
+{% block footer %}
+<footer class="order-footer"><span>{{ shop.name }} · {{ shop.street }}, {{ shop.city }}</span><a href="tel:{{ shop.phoneLink }}">{{ shop.phone }}</a></footer>
+{% endblock %}

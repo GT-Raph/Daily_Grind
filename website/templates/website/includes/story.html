@@ -1,0 +1,32 @@
+{% load static %}
+<section id="top" class="story" aria-label="Welcome to The Daily Grind" data-scene="0">
+  <div class="story__stage">
+    <div class="story__glow" aria-hidden="true"></div>
+    <div class="scene scene--one is-active">
+      <p class="watermark" aria-hidden="true">Spintex</p>
+      <div class="scene__lead">
+        <h1 class="display" aria-label="The best coffee on Spintex Road"><span class="mask" aria-hidden="true"><span class="mask__inner">The best</span></span><span class="mask" aria-hidden="true"><span class="mask__inner">coffee on</span></span><span class="mask" aria-hidden="true"><span class="mask__inner">Spintex Road</span></span></h1>
+        <p class="scene__body">Specialty coffee made with our own house blend, by people who take the craft seriously.</p>
+        <div class="scene__actions"><a class="btn btn--maroon" href="#menu">See the menu</a><a class="btn btn--ink" href="tel:{{ shop.phoneLink }}">Call to order</a></div>
+      </div>
+      <img class="story__still-cup" src="{% static 'images/story-cup.webp' %}" alt="The Daily Grind house blend takeaway cup" width="604" height="900">
+      <aside class="scene__aside">
+        <div class="thumbs"><img src="{% static 'images/menu/spanish-latte.webp' %}" alt=""><img src="{% static 'images/menu/awarma-labneh-saj.webp' %}" alt=""><img src="{% static 'images/menu/butter-croissant.webp' %}" alt=""></div>
+        <h2 class="aside__title">Rated {{ shop.rating }} on Google</h2>
+        <ul class="ticks"><li>{% include 'website/includes/check.html' %}<span><strong>Our own house blend.</strong> Every espresso drink is made with a blend that is ours alone.</span></li><li>{% include 'website/includes/check.html' %}<span><strong>Made in our kitchen.</strong> Saj, toasted sandwiches and sauces our chef makes in-house.</span></li></ul>
+      </aside>
+    </div>
+    <div class="scene scene--two">
+      <p class="watermark" aria-hidden="true">Latte</p>
+      <div class="scene__lead"><p class="script">Try the</p><h2 class="display display--sm">Morning Muse</h2><p class="scene__body">A latte from our Hot Grinds menu. Explore hot coffee, cold coffee, tea and fresh juices.</p><a class="link-arrow" href="#menu">See all drinks</a></div>
+      <aside class="scene__aside"><h2 class="aside__title aside__title--lg">A seat for every kind of day</h2><ul class="ticks"><li>{% include 'website/includes/check.html' %}<span><strong>Inside.</strong> A cosy, non-smoking room with reliable wifi for work and meetings.</span></li><li>{% include 'website/includes/check.html' %}<span><strong>Outside.</strong> Outdoor seating, where smoking and shisha are welcome.</span></li></ul></aside>
+    </div>
+    <div class="scene scene--three">
+      <h2 class="giant" aria-label="Our own house blend"><span class="giant__a" aria-hidden="true">Our own</span><span class="giant__b" aria-hidden="true">House</span><span class="giant__c" aria-hidden="true">Blend</span></h2>
+      <div class="scene__foot"><p class="scene__body">Every cup starts with a blend that is ours alone, dialled in fresh each morning.</p><a class="btn btn--maroon btn--round-arrow" href="#menu">See the menu<span class="btn__arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2"/></svg></span></a></div>
+    </div>
+    <div class="story__cup" aria-hidden="true"><div class="story__float"><img src="{% static 'images/story-cup.webp' %}" alt="" draggable="false" width="604" height="900" fetchpriority="high"></div></div>
+    <div class="story__beans" aria-hidden="true" data-static="{% get_static_prefix %}"></div>
+    <div class="story__progress" aria-hidden="true"><span class="is-active"></span><span></span><span></span></div>
+  </div>
+</section>

@@ -1,0 +1,18 @@
+{% extends 'staff_portal/base.html' %}
+{% block title %}{% if history %}Order history{% else %}Pickup orders{% endif %} · Daily Grind staff{% endblock %}
+{% block content %}
+<section class="staff-orders">
+  <header class="staff-heading">
+    <div><h1>{% if history %}Order history{% else %}Pickup orders{% endif %}</h1><p>{% if history %}The last 50 collected and cancelled orders.{% else %}Accept, prepare, and mark each order collected.{% endif %}</p></div>
+    <a class="staff-admin" href="{% url 'admin:website_order_changelist' %}">Administration</a>
+  </header>
+  <div class="queue-toolbar">
+    <nav aria-label="Order views"><a href="{% url 'staff:orders' %}"{% if not history %} aria-current="page"{% endif %}>Active orders</a><a href="{% url 'staff:orders' %}?history=1"{% if history %} aria-current="page"{% endif %}>Recent history</a></nav>
+    <div class="staff-updates"><p class="field-help" data-poll-status role="status">Refresh to check for updates.</p><a href="{% url 'staff:orders' %}{% if history %}?history=1{% endif %}" data-refresh-orders>Refresh</a><a href="{% url 'staff:login' %}?next={% url 'staff:orders' %}{% if history %}%3Fhistory%3D1{% endif %}" data-session-login hidden>Sign in again</a></div>
+  </div>
+  {% if not can_change %}<p class="staff-readonly">View-only access. Ask your manager if you need to update orders.</p>{% endif %}
+  {% for message in messages %}<p class="order-notice" role="alert">{{ message }}</p>{% endfor %}
+  <div data-order-queue data-poll-url="{% url 'staff:orders' %}?partial=1{% if history %}&amp;history=1{% endif %}">{% include 'staff_portal/includes/order_queue.html' %}</div>
+  <p class="sr-only" role="status" data-queue-announcement></p>
+</section>
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends 'website/base.html' %}
+{% load static %}
+{% block content %}
+{% include 'website/includes/story.html' %}
+<section id="menu" class="menu section">
+  <div class="menu__head" data-reveal>
+    <h2 class="display display--md">The menu</h2>
+    <p class="menu__note">Order for pickup and pay at the shop. Prices in Ghana cedis. For delivery, call {{ shop.phone }}.</p>
+    <p class="menu__note">Images are illustrative. For extras and custom orders, call the shop. <a href="https://drive.google.com/file/d/1pZsfDeBi4RSDt9mDIJ4Ks8eMM4lK7_KR/view" target="_blank" rel="noreferrer">View the printed menu</a>.</p>
+  </div>
+  <div class="filters" role="tablist" aria-label="Menu sections" hidden>
+    {% for filter in filters %}
+    <button type="button" class="filter" role="tab" id="tab-{{ filter.id }}" data-filter="{{ filter.id }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="menu-panel" tabindex="{% if forloop.first %}0{% else %}-1{% endif %}">
+      <span class="filter__pill"{% if not forloop.first %} hidden{% endif %}></span><span class="filter__label">{{ filter.label }}</span>
+    </button>
+    {% endfor %}
+  </div>
+  <ul id="menu-panel" class="cards" aria-label="Menu items">
+    {% for item in items %}
+    <li class="card{% if item.featured %} card--featured{% endif %}" data-group="{{ item.group }}">
+      <div class="card__inner" data-reveal>
+        <div class="card__photo{% if not item.image %} is-missing{% endif %}">
+          {% if item.image %}<img src="{{ item.image }}" alt="{{ item.name }}" loading="lazy" width="480" height="480">{% endif %}
+          {% if item.featured %}<span class="card__tag">Reviewers' pick</span>{% endif %}
+        </div>
+        <div class="card__row"><h3 class="card__name">{{ item.name }}</h3><p class="card__price"><span class="sr-only">Price: </span>{% if item.price_label %}{{ item.price_label }}{% else %}GH₵{{ item.price }}{% endif %}</p></div>
+        <p class="card__note">{{ item.note }}</p>
+        {% if ordering_enabled and not item.call_to_order %}
+        <form action="{% url 'website:change_cart' %}" method="post" data-add-to-order>
+          {% csrf_token %}<input type="hidden" name="product_id" value="{{ item.id }}"><input type="hidden" name="quantity" value="1">
+          <button type="submit" class="card__btn{% if item.featured %} card__btn--filled{% endif %}" aria-label="Add {{ item.name }} to your order">Add to order<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5v14" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
+        </form>
+        {% else %}<a class="card__btn" href="tel:{{ shop.phoneLink }}">Call to order</a>{% endif %}
+      </div>
+    </li>
+    {% empty %}<li class="order-empty"><h3>Our menu is being updated.</h3><p>Please call {{ shop.phone }} to order.</p></li>{% endfor %}
+  </ul>
+</section>
+<div class="basket-dock" data-basket-dock{% if not basket_count %} hidden{% endif %}>
+  <a href="{% url 'website:basket' %}"><span>View order <span data-basket-count>{{ basket_count }}</span></span><span>GH₵<span data-basket-total>{{ basket_total|floatformat:2 }}</span></span></a>
+</div>
+<p class="order-feedback" role="status" aria-live="polite" data-order-feedback></p>
+<section id="reviews" class="reviews section is-offscreen">
+  <div class="reviews__head" data-reveal>
+    <h2 class="section__title">What people say</h2>
+    <div class="reviews__score">
+      <span class="reviews__number" aria-label="{{ shop.rating }} out of 5">{{ shop.rating }}</span>
+      <span><span class="reviews__stars" aria-hidden="true">
+        {% for i in '12345' %}<svg viewBox="0 0 24 24"><path d="m12 2.8 2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4-4.7-4.4 6.4-.8z" fill="currentColor"/></svg>{% endfor %}
+      </span><span class="reviews__count">From {{ shop.reviewCount }} reviews on <a href="{{ maps_url }}" target="_blank" rel="noreferrer">Google Maps</a></span></span>
+    </div>
+    <button type="button" class="reviews__pause" aria-pressed="false" hidden>Pause reviews</button>
+  </div>
+  {% for row in review_rows %}
+  <div class="marquee{% if forloop.counter0 %} marquee--reverse{% endif %}">
+    <div class="marquee__track">
+      <div class="marquee__set">{% for review in row %}{% include 'website/includes/review.html' %}{% endfor %}</div>
+      <div class="marquee__set" aria-hidden="true">{% for review in row %}{% include 'website/includes/review.html' %}{% endfor %}</div>
+    </div>
+  </div>
+  {% endfor %}
+</section>
+<section id="visit" class="visit section">
+  <div class="visit__where" data-reveal>
+    <h2 class="section__title">Come by</h2>
+    <address class="visit__address">{{ shop.street }}<br>{{ shop.city }}</address>
+    <p class="visit__contact"><a href="tel:{{ shop.phoneLink }}">{{ shop.phone }}</a><br>Plus code {{ shop.plusCode }}</p>
+    <a class="btn btn--peach" href="{{ maps_url }}" target="_blank" rel="noreferrer">Get directions</a>
+    <p class="visit__order">Dine in, take away, or call us for delivery.</p>
+  </div>
+  <table class="hours" data-reveal>
+    <caption>Opening hours</caption>
+    <tbody>{% for hour in hours %}<tr{% if hour.today %} class="is-today"{% endif %}><th scope="row">{{ hour.day }}{% if hour.today %}<span class="hours__today">Today</span>{% endif %}</th><td>{{ hour.opening }} to {{ hour.closing }}</td></tr>{% endfor %}</tbody>
+  </table>
+  <div id="newsletter" class="news" tabindex="-1" data-reveal>
+    <h3 class="news__title">Hear what's new</h3>
+    <p>Occasional emails about new drinks and events at the shop.</p>
+    {% if messages %}
+      {% for message in messages %}<p class="news__done" role="status">{{ message }}</p>{% endfor %}
+    {% else %}
+      <form class="news__form" action="{% url 'website:subscribe' %}#newsletter" method="post">
+        {% csrf_token %}
+        <label for="email" class="sr-only">Email address</label>
+        {{ form.email }}
+        <button type="submit" class="btn btn--peach">Sign up</button>
+        <div id="email-errors" class="news__errors"{% if form.errors %} role="alert"{% endif %}>{{ form.email.errors }}</div>
+      </form>
+    {% endif %}
+  </div>
+  <div class="perks" data-reveal>
+    <h3 class="perks__title">Good to know</h3>
+    <dl class="perks__list">{% for term, detail in perks %}<div class="perks__item"><dt>{{ term }}</dt><dd>{{ detail }}</dd></div>{% endfor %}</dl>
+  </div>
+</section>
+{% endblock %}

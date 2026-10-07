@@ -1,0 +1,16 @@
+{% if notification_issues %}<div class="order-notice"><strong>Connect order notifications</strong>{% for channel, issue in notification_issues.items %}<p>{{ issue }}</p>{% endfor %}<p>Orders still appear here. Ask your site administrator to check email settings and the notification worker.</p></div>{% endif %}
+{% for order in orders %}
+<article class="queue-order" data-queue-id="{{ order.id }}" data-order-status="{{ order.status }}">
+  <header class="queue-order__head"><div><h2>{{ order.reference }}</h2><p><time datetime="{{ order.created_at|date:'c' }}">{{ order.created_at|date:'j M, H:i' }}</time> · {{ order.customer_name }}</p><a href="tel:{{ order.phone }}">{{ order.phone }}</a></div><span class="order-state">{{ order.get_status_display }}</span></header>
+  <div class="queue-order__body"><div><ul class="summary-lines">{% for item in order.items.all %}<li><span>{{ item.quantity }} × {{ item.name }}</span><span>GH₵{{ item.subtotal|floatformat:2 }}</span></li>{% endfor %}</ul>{% if order.notes %}<p class="queue-note"><strong>Customer note:</strong> {{ order.notes }}</p>{% endif %}<p class="queue-total">GH₵{{ order.total|floatformat:2 }} · {% if order.status == 'completed' %}Paid at pickup{% elif order.status == 'cancelled' %}Cancelled{% else %}Pay at pickup{% endif %}</p></div>
+    <div class="queue-controls">
+      {% if can_change and order.next_status %}
+      <form method="post" action="{% url 'staff:order_status' order.id %}" data-status-form>{% csrf_token %}<input type="hidden" name="previous_status" value="{{ order.status }}"><button name="status" value="{{ order.next_status }}" class="btn btn--maroon">{% if order.status == 'new' %}Accept order{% elif order.status == 'accepted' %}Mark ready for pickup{% else %}Mark paid &amp; collected{% endif %}</button></form>
+      <form method="post" action="{% url 'staff:order_status' order.id %}" data-status-form>{% csrf_token %}<input type="hidden" name="previous_status" value="{{ order.status }}"><button name="status" value="cancelled" class="text-button">Cancel order<span class="sr-only"> {{ order.reference }}</span></button></form>
+      {% endif %}
+      <ul class="notification-status">{% for alert in order.notifications.all %}<li><strong>{{ alert.get_channel_display }}:</strong> {{ alert.get_status_display }}{% if alert.last_error %}<span>{{ alert.last_error }}{% if alert.attempts >= 5 %} Retry from Administration.{% endif %}</span>{% endif %}</li>{% endfor %}</ul>
+    </div>
+  </div>
+</article>
+{% empty %}<div class="order-empty"><h2>{% if history %}No past orders yet.{% else %}All caught up.{% endif %}</h2><p>{% if history %}Collected and cancelled orders will appear here.{% else %}New pickup orders will appear here automatically while this page is open.{% endif %}</p></div>{% endfor %}
+<p class="field-help queue-checked">Last checked {{ checked_at|date:'H:i:s' }} · Accra time. Email status shows acceptance by the email service; check the shop inbox for delivery.</p>

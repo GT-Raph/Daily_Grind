@@ -1,0 +1,8 @@
+Use case: product-mockup
+Asset type: illustrative photoreal cafe menu product cutout.
+Scene/backdrop: genuinely transparent background with native alpha; no surface or scenery.
+Style/medium: appetizing photorealistic food illustration, detailed natural texture, restrained studio food photography style.
+Composition/framing: one square image, complete serving centered at an elevated three-quarter angle, at least 8 percent clear margin on every edge. Entire food and any plate fully in frame, no cropping.
+Lighting/mood: soft studio light, realistic highlights and appetizing warm tones.
+Subject: Pepperoni Poet: one rectangular pressed panini cut diagonally into two halves, showing melted white mozzarella, thin pepperoni rounds and a thin layer of rich homemade sauce. Golden ridged pressed bread, red pepperoni clearly identifiable. No vegetables.
+Constraints: only the specified food components; no invented toppings, garnish, side orders, drinks, utensils, napkins, text, labels, logos, watermark, hands, people, table, background or scenery. Transparent background, not a checkerboard image. This is an illustrative menu asset, not a claim to document an actual serving.

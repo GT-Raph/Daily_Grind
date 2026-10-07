@@ -1,0 +1,9 @@
+{% extends 'staff_portal/base.html' %}
+{% block title %}Staff access needed · The Daily Grind{% endblock %}
+{% block content %}
+<section class="staff-login">
+  <h1>{% if view_only %}View-only access{% else %}Staff access needed{% endif %}</h1>
+  <p>{% if view_only %}Your account can view orders but cannot update them. Ask your shop manager for permission to change orders.{% else %}This account does not have access to shop orders. Ask your shop manager for access, or sign out and use a staff account.{% endif %}</p>
+  {% if view_only %}<a href="{% url 'staff:orders' %}" class="btn btn--maroon">Back to orders</a>{% endif %}
+</section>
+{% endblock %}
