@@ -128,6 +128,8 @@
       const element = document.createElement('div');
       element.className = 'bean';
       Object.assign(element.style, { left: `${left}%`, top: `${top}%`, width: `${size}px` });
+      // Far-away beans pass behind the cup, so none ever drifts across the printed logo.
+      if (depth < .5) element.classList.add('bean--behind');
       const img = document.createElement('img');
       img.src = `${beanContainer.dataset.static}images/bean-${image}.webp`;
       img.alt = '';

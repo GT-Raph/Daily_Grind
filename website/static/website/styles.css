@@ -627,8 +627,8 @@ button {
   left: 50%;
   top: 56%;
   height: var(--h);
-  aspect-ratio: 604 / 900;
-  margin-left: calc(var(--h) * -0.3356);
+  aspect-ratio: 648 / 900;
+  margin-left: calc(var(--h) * -0.36);
   margin-top: calc(var(--h) / -2);
   pointer-events: none;
 }
@@ -644,6 +644,10 @@ button {
   position: absolute;
   z-index: 4;
   pointer-events: none;
+}
+
+.bean--behind {
+  z-index: 1;
 }
 
 .bean img {
