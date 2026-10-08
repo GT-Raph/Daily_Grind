@@ -4,8 +4,13 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="The Daily Grind is a specialty coffee shop on Spintex Road, Accra, with its own house blend. Dine in, take away or delivery.">
-    <link rel="icon" href="{% static 'favicon.svg' %}" type="image/svg+xml">
+    <meta name="description" content="The Daily Grind is a community coffee shop on Spintex Road, Accra, with its own house blend. Dine in, take away or delivery.">
+    <link rel="icon" href="{% static 'images/brand/favicon-48.png' %}" type="image/png" sizes="48x48">
+    <link rel="apple-touch-icon" href="{% static 'images/brand/apple-touch-icon.png' %}">
+    <meta name="theme-color" content="#f7cfa9">
+    <meta property="og:title" content="The Daily Grind, community coffee shop">
+    <meta property="og:description" content="Specialty coffee, saj wraps and fresh bakes on Spintex Road, Accra.">
+    <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'images/brand/share-card.png' %}">
     <link rel="preload" href="{% static 'website/fonts/big-shoulders-normal.woff2' %}" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="{% static 'website/fonts/fonts.css' %}">
     <link rel="stylesheet" href="{% static 'website/styles.css' %}">

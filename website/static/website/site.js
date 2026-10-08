@@ -111,7 +111,7 @@
   const pause = document.querySelector('.reviews__pause');
   const marquees = [...document.querySelectorAll('.marquee')];
   const footer = document.querySelector('.footer');
-  const footerMark = document.querySelector('.footer__mark span');
+  const footerMark = document.querySelector('.footer__mark img');
   const stops = [0, .22, .38, .56, .72, 1];
   const sceneKeys = [
     [[0, .26, .38], [1, 1, 0], [0, 0, -60]],
@@ -122,7 +122,7 @@
   function buildBeans() {
     const specs = wide.matches
       ? [['a', 61, 22, 70, .6, 20], ['b-blur4', 33, 58, 104, 1.3, -30], ['a-blur2', 93, 70, 138, 1.6, 60], ['b-blur2', 2, 8, 96, 1.1, 140], ['a', 55, 74, 46, .4, -80]]
-      : [['a', 70, 20, 54, .5, 20], ['b-blur2', 4, 10, 74, .9, 140], ['a-blur2', 84, 44, 84, .7, 60], ['b', 14, 42, 38, .4, -40]];
+      : [['a', 70, 20, 54, .5, 20], ['b-blur2', 4, 17, 74, .9, 140], ['a-blur2', 84, 44, 84, .7, 60], ['b', 14, 42, 38, .4, -40]];
     beanContainer.replaceChildren();
     beans = specs.map(([image, left, top, size, depth, spin], i) => {
       const element = document.createElement('div');

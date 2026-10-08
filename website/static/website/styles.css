@@ -278,7 +278,7 @@ button {
   }
 }
 
-/* Navigation: links either side of a centred square badge */
+/* Navigation: links either side of the centred logo */
 .nav {
   position: fixed;
   inset: 0 0 auto;
@@ -288,6 +288,8 @@ button {
   align-items: center;
   gap: 40px;
   height: var(--nav-h);
+  /* One fixed row, so the taller hanging logo overflows the bar instead of pushing the links down */
+  grid-template-rows: var(--nav-h);
   padding: 0 var(--gutter);
   transition: background-color 250ms ease, box-shadow 250ms ease;
 }
@@ -324,42 +326,43 @@ button {
   }
 }
 
+/* The shop's logo hangs below the bar at the top of the page, large enough to read like
+   shop signage, then settles into the bar as soon as the visitor scrolls. Only transform
+   animates, and a transition (not keyframes) reverses smoothly when scrolling back up. */
 .nav__logo {
   display: block;
+  align-self: start;
+  margin-top: 12px;
   text-decoration: none;
-  transition: transform 200ms var(--ease-out);
+  transform-origin: 50% 0;
+  transition: transform 380ms var(--ease-out);
 }
 
-.nav__logo:active {
+.nav--solid .nav__logo {
+  transform: translateY(-4px) scale(0.5);
+}
+
+.nav[data-instant='true'] .nav__logo {
+  transition: none;
+}
+
+/* The nav shows the logo without its tagline, which would be unreadable at bar size */
+.brand-logo {
+  display: block;
+  width: auto;
+  height: 132px;
+  transition: transform 160ms var(--ease-out);
+}
+
+.nav__logo:active .brand-logo {
   transform: scale(0.96);
 }
 
-/* The square logo badge */
-.badge {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 58px;
-  height: 58px;
-  border-radius: 8px;
-  background: var(--ink);
-  color: var(--white);
-  font-family: var(--display);
-  font-weight: 900;
-  text-transform: uppercase;
-  line-height: 0.92;
-}
-
-.badge__small {
-  font-size: 0.5rem;
-  letter-spacing: 0.2em;
-  color: var(--peach);
-}
-
-.badge__big {
-  font-size: 0.95rem;
-  letter-spacing: 0.04em;
+@media (prefers-reduced-motion: reduce) {
+  .nav__logo,
+  .brand-logo {
+    transition: none;
+  }
 }
 
 .nav__toggle {
@@ -421,9 +424,15 @@ button {
   .nav__toggle {
     display: flex;
   }
-  .badge {
-    width: 50px;
-    height: 50px;
+  .nav__logo {
+    margin-top: 10px;
+    transform-origin: 0 0;
+  }
+  .brand-logo {
+    height: 92px;
+  }
+  .nav--solid .nav__logo {
+    transform: translateY(-2px) scale(0.6);
   }
 }
 
@@ -1285,7 +1294,7 @@ button {
 
 /* Footer */
 .footer {
-  padding: 48px var(--gutter) 28px;
+  padding: 0 0 28px;
   background: var(--footer);
   color: rgba(255, 255, 255, 0.72);
   font-size: var(--step--1);
@@ -1295,19 +1304,11 @@ button {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 24px;
-  padding-bottom: 28px;
+  margin: 0 var(--gutter);
+  padding: 32px 0 28px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-.footer .badge {
-  background: var(--peach);
-  color: var(--brown);
-}
-
-.footer .badge__small {
-  color: var(--maroon);
 }
 
 .footer__links {
@@ -1333,20 +1334,25 @@ button {
   }
 }
 
-/* The closing wordmark, cropped by the footer's edge as it rises */
+/* The page ends on the shop's full logo, rising into its own light band as the visitor arrives */
 .footer__mark {
+  display: flex;
+  justify-content: center;
   overflow: hidden;
-  padding-top: 28px;
-  text-align: center;
+  padding: clamp(56px, 8vw, 104px) var(--gutter) clamp(44px, 6vw, 80px);
+  background: var(--peach-light);
+  border-top: 1px solid var(--line);
 }
 
-.footer__mark span {
+.footer__mark a {
   display: block;
-  /* Sized to the footer's width, so the whole name always fits on one line */
-  font: 900 13.2vw / 0.8 var(--display);
-  text-transform: uppercase;
-  white-space: nowrap;
-  color: var(--peach);
+  border-radius: 12px;
+}
+
+.footer__mark img {
+  display: block;
+  width: auto;
+  height: clamp(240px, 30vw, 380px);
 }
 
 .footer__bottom {
@@ -1354,6 +1360,7 @@ button {
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 8px 24px;
+  margin: 0 var(--gutter);
   padding-top: 20px;
 }
 

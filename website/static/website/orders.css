@@ -11,8 +11,8 @@ button:disabled { cursor: wait; opacity: .65; }
 .order-feedback:empty { display: none; }
 .order-feedback { position: fixed; z-index: 46; bottom: 98px; right: var(--gutter); width: min(360px, calc(100% - 32px)); padding: 12px 18px; border: 1px solid var(--brown); border-radius: 6px; background: var(--peach-light); font-size: .9rem; }
 .order-nav { max-width: 1440px; margin: auto; min-height: 106px; padding: 20px var(--gutter); display: flex; align-items: center; justify-content: space-between; gap: 24px; border-bottom: 1px solid var(--line); }
-.order-nav__brand { display: block; width: 104px; flex: 0 0 104px; }
-.order-nav__brand svg { width: 100%; display: block; height: auto; }
+.order-nav__brand { display: block; flex: 0 0 auto; }
+.order-nav__brand .brand-logo { height: 72px; }
 .order-nav nav { display: flex; gap: 28px; font-weight: 600; }
 .order-nav a, .order-footer a { text-underline-offset: 4px; }
 .order-nav nav a { padding: 10px 0; }
@@ -94,7 +94,7 @@ button:disabled { cursor: wait; opacity: .65; }
   .order-layout { grid-template-columns: minmax(0, 1fr); gap: 32px; }
   .order-heading { margin-bottom: 28px; }
   .order-nav { min-height: 90px; }
-  .order-nav__brand { width: 86px; flex-basis: 86px; }
+  .order-nav__brand .brand-logo { height: 60px; }
   .order-nav nav { gap: 20px; font-size: .875rem; }
   .order-summary { padding: 24px; }
   .queue-order__body { grid-template-columns: minmax(0, 1fr); gap: 24px; }

@@ -1,13 +1,17 @@
+from django import forms
 from django.contrib import admin
+from django.core.files.uploadedfile import UploadedFile
 from django.db.models import Count, Max, Min, Q, Sum
 from django.urls import reverse
 from django.utils import timezone
+from django.templatetags.static import static
 from django.utils.html import format_html
 from urllib.parse import urlencode
 from decimal import Decimal
 import re
 
 from .models import Customer, Discount, MenuPrice, Order, OrderItem, OrderNotification, Subscriber
+from .photos import NOT_A_PHOTO, prepare_menu_photo
 
 
 @admin.register(Subscriber)
@@ -35,14 +39,43 @@ class AdministratorOnlyAdmin(admin.ModelAdmin):
         return self.has_view_permission(request, obj)
 
 
+class MenuPriceForm(forms.ModelForm):
+    class Meta:
+        model = MenuPrice
+        fields = "__all__"
+        widgets = {"photo": forms.ClearableFileInput(attrs={"accept": "image/jpeg,image/png,image/webp"})}
+        error_messages = {"photo": {"invalid_image": NOT_A_PHOTO}}
+
+    def clean_photo(self):
+        photo = self.cleaned_data.get("photo")
+        # Only a newly chosen file is processed; an existing photo or a cleared one passes through unchanged.
+        if isinstance(photo, UploadedFile):
+            return prepare_menu_photo(photo, self.instance.pk or "product")
+        return photo
+
+
 @admin.register(MenuPrice)
 class MenuPriceAdmin(AdministratorOnlyAdmin):
+    form = MenuPriceForm
     list_display = ("name", "category", "price", "call_to_order", "is_active", "updated_at")
     list_filter = ("category", "is_active", "call_to_order")
     search_fields = ("name",)
     fields = ("name", "category", "note", "price", "call_to_order", "price_label", "order_note_prompt",
-              "is_active", "image_url", "display_order", "updated_at")
-    readonly_fields = ("updated_at",)
+              "is_active", "current_photo", "photo", "image_url", "display_order", "updated_at")
+    readonly_fields = ("current_photo", "updated_at")
+
+    @admin.display(description="shown on the menu")
+    def current_photo(self, product):
+        if product.photo:
+            source, label = product.photo.url, "Uploaded photo"
+        elif product.image_url:
+            source, label = product.image_url, "Photo from URL"
+        elif product.image_path:
+            source, label = static(product.image_path), "Built-in menu artwork"
+        else:
+            return "No photo yet. The menu shows the shop's bean mark."
+        return format_html('<img src="{}" alt="" width="120" height="120" style="object-fit:contain;background:#fff;'
+                           'border-radius:6px"><br>{}', source, label)
     actions = ("hide_products", "show_products")
 
     @admin.action(description="Remove selected products from the menu", permissions=["change"])

@@ -1,10 +1,11 @@
-<footer class="footer">
+{% load static %}<footer class="footer">
+  <div class="footer__mark">
+    <a href="#top" aria-label="{{ shop.name }}, community coffee shop. Back to top"><img src="{% static 'images/brand/logo.webp' %}" srcset="{% static 'images/brand/logo.webp' %} 360w, {% static 'images/brand/logo@2x.webp' %} 710w" sizes="300px" alt="" width="360" height="460" loading="lazy"></a>
+  </div>
   <div class="footer__top">
-    <a href="#top" aria-label="{{ shop.name }}, back to top">{% include 'website/includes/badge.html' %}</a>
     <nav class="footer__links" aria-label="Footer">
       <a href="#top">Home</a><a href="#menu">Menu</a><a href="#reviews">Reviews</a><a href="#visit">Visit</a><a href="tel:{{ shop.phoneLink }}">Call to order</a>
     </nav>
   </div>
-  <div class="footer__mark" aria-hidden="true"><span>The Daily Grind</span></div>
   <div class="footer__bottom"><span>{{ shop.street }}, {{ shop.city }}. Tap to pay with your phone.</span><span>&copy; {% now 'Y' %} {{ shop.name }}</span></div>
 </footer>

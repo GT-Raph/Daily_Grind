@@ -58,6 +58,11 @@ USE_TZ = True
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "public"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
+# Photos administrators upload for menu products. Keep this folder on the same persistent,
+# backed-up storage as the database, and serve it at MEDIA_URL in production.
+MEDIA_URL = "/media/"
+MEDIA_ROOT = Path(os.environ.get("DJANGO_MEDIA_ROOT", BASE_DIR / "media"))
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_SECURE = not DEBUG

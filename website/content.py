@@ -41,7 +41,8 @@ def menu_items():
         percentage = Decimal("0") if product.call_to_order else discounts.get(product.pk, all_products_discount)
         price = None if product.price is None else (product.price * (Decimal("100") - percentage) / Decimal("100")).quantize(
             Decimal("0.01"), rounding=ROUND_HALF_UP)
-        photo = product.image_url or (static(product.image_path) if product.image_path else "")
+        # An uploaded photo comes first, then a photo URL, then the supplied menu artwork.
+        photo = (product.photo.url if product.photo else "") or product.image_url or (static(product.image_path) if product.image_path else "")
         items.append({"name": product.name, "note": product.note, "id": product.pk, "group": product.category,
                       "price": price, "base_price": product.price, "discount_percentage": percentage,
                       "image": photo, "basket_image": photo or static("images/bean-a.webp"), "featured": product.featured,

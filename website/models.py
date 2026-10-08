@@ -3,7 +3,9 @@ from decimal import Decimal
 
 from django.core.exceptions import ValidationError
 from django.core.validators import MaxValueValidator, MinValueValidator, URLValidator
-from django.db import models
+from django.db import models, transaction
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
 from django.utils import timezone
 
 
@@ -43,8 +45,12 @@ class MenuPrice(models.Model):
         help_text="For combos, say which choices the customer must write in their checkout notes.")
     is_active = models.BooleanField("on the menu", default=True,
         help_text="Uncheck to remove this product from the menu temporarily. Existing orders are kept.")
+    photo = models.ImageField("photo", upload_to="menu/", blank=True,
+        help_text="Upload a photo from your computer: JPG, PNG or WebP, up to 8 MB. It is resized for the menu automatically "
+                  "and shown instead of any photo URL or built-in artwork.")
     image_url = models.URLField("photo URL", max_length=500, blank=True, validators=[URLValidator(schemes=["https"])],
-        help_text="Optional HTTPS address of a product photo. Leave blank to keep the existing photo or show the shop's bean mark.")
+        help_text="Optional HTTPS address of a product photo, used when no photo is uploaded. "
+                  "Leave blank to keep the existing photo or show the shop's bean mark.")
     image_path = models.CharField(max_length=200, blank=True, editable=False)
     featured = models.BooleanField(default=False, editable=False)
     display_order = models.PositiveSmallIntegerField(default=1000, help_text="Lower numbers appear first.")
@@ -72,6 +78,29 @@ class MenuPrice(models.Model):
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        previous = None
+        update_fields = kwargs.get("update_fields")
+        photo_included = update_fields is None or "photo" in update_fields
+        if self.pk and photo_included:
+            previous = MenuPrice.objects.filter(pk=self.pk).values_list("photo", flat=True).first()
+        super().save(*args, **kwargs)
+        # A replaced or cleared upload is deleted once the change is committed, so the media folder holds no orphans.
+        if not photo_included or not previous:
+            return
+        persisted = MenuPrice.objects.filter(pk=self.pk).values_list("photo", flat=True).first()
+        if previous != persisted:
+            storage = self.photo.storage
+            transaction.on_commit(lambda: storage.delete(previous))
+
+
+# Runs for single and bulk admin deletes alike (bulk deletes skip Model.delete).
+@receiver(post_delete, sender=MenuPrice)
+def remove_deleted_product_photo(sender, instance, **kwargs):
+    if instance.photo.name:
+        name, storage = instance.photo.name, instance.photo.storage
+        transaction.on_commit(lambda: storage.delete(name))
 
 
 class Discount(models.Model):
