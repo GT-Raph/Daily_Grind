@@ -12,3 +12,5 @@ staticfiles/
 .claude/
 .qodo/
 tmp/
+.impeccable/
+founder/

@@ -1,2 +1,0 @@
-- Idea: coffee shop websites for independent café owners in Accra (2026-10-04, validate-idea)
-- Founder is building the Daily Grind site on spec, to sell to The Daily Grind's owners (2026-10-04, validate-idea follow-up)
