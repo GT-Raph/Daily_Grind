@@ -13,6 +13,11 @@ import re
 from .models import Customer, Discount, MenuPrice, Order, OrderItem, OrderNotification, Subscriber
 from .photos import NOT_A_PHOTO, prepare_menu_photo
 
+# The shop's name instead of Django's defaults: the page heading, the browser tab, and the dashboard.
+admin.site.site_header = "The Daily Grind shop admin"
+admin.site.site_title = "The Daily Grind admin"
+admin.site.index_title = "Manage the shop"
+
 
 @admin.register(Subscriber)
 class SubscriberAdmin(admin.ModelAdmin):
